@@ -1,165 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Loving Surprise</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti Library for Page 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Link to External CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Our Little World 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Mute Toggle -->
-    <button class="mute-toggle" onclick="toggleMute()">🔊 Mute Sounds 🧸</button>
 
-    <!-- Page 1: Home -->
-    <section id="page1" class="page active">
-        <h1>Welcome to Our World 🧸💖</h1>
-        <p><!-- INSERT: Your big, warm welcome message here, e.g., "My dearest [Girlfriend's Name], welcome to a little corner of the internet I made just for you." --></p>
-        <p><!-- INSERT: A short, sweet paragraph about what she means to you, e.g., "You are the light of my life, the reason I smile every day. 🥰" --></p>
-        <button onclick="playSound('chime'); showHearts();">Click for a Hug 💕🧸</button>
-        <button onclick="navigateTo('page2')">Next: Reasons Why ➡️❤️</button>
-        <div class="hearts-container" id="hearts"></div>
-        <div class="teddy-float" id="teddy-float"></div>
-    </section>
+<!-- FLOATING BACKGROUND -->
+<div class="floating-bg"></div>
 
-    <!-- Page 2: Reasons Why -->
-    <section id="page2" class="page">
-        <h1>A Few (of the Many) Reasons... 🐾💖</h1>
-        <div id="reasons-list">
-            <div class="reason-item" onclick="revealReason(this)">
-                <span>💌🧸 Reason 1</span>
-                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "Your laugh is my favorite sound. 🌸" --></p>
-            </div>
-            <div class="reason-item" onclick="revealReason(this)">
-                <span>💌🧸 Reason 2</span>
-                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "The way you [specific habit, e.g., dance in the kitchen]. 🥰" --></p>
-            </div>
-            <div class="reason-item" onclick="revealReason(this)">
-                <span>💌🧸 Reason 3</span>
-                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "Your incredible kindness. 💖" --></p>
-            </div>
-            <!-- Add more as needed -->
-        </div>
-        <button onclick="navigateTo('page3')">Next: Our Memories ➡️❤️</button>
-    </section>
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music/bg-music.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Page 3: Memories -->
-    <section id="page3" class="page">
-        <h1>Our Little Adventures 🧸🌸</h1>
-        <div class="memory-gallery">
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Picnic')">🧺🧸 Picnic</div>
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Movie')">🎥💖 Movie Night</div>
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Mountain')">🏔️🥰 Hike</div>
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Coffee')">☕🧸 Coffee Date</div>
-        </div>
-        <div class="tooltip" id="tooltip"><!-- INSERT: Caption like "Remember our first picnic? It was magical! 🥰" --></div>
-        <button onclick="navigateTo('page4')">Next: A Wish for Us ➡️❤️</button>
-    </section>
+<!-- MUTE -->
+<button id="muteToggle">🔊</button>
 
-    <!-- Page 4: Wish -->
-    <section id="page4" class="page">
-        <h1>My Wish for Our New Year 🧸💖</h1>
-        <p><!-- INSERT: Your heartfelt paragraph here, e.g., "I wish for more adventures, more laughter, and a lifetime of love together. 🌸🥰" --></p>
-        <button onclick="makeWish()">Make a Wish Together 🌟🧸</button>
-        <div id="wish-effect"></div>
-    </section>
+<!-- MASCOT -->
+<img src="illustrations/bunny.png" id="mascot" alt="Cute Bunny">
 
-    <!-- Page 5: Finale -->
-    <section id="page5" class="page">
-        <h1>Happy New Year, My Love! 🧸💖🥰</h1>
-        <p><!-- INSERT: Your final, profound message here, e.g., "Here's to new beginnings, endless love, and a year filled with joy. 🌸" --></p>
-        <div id="countdown">00:00:00 - Time for our new beginning! 🧸❤️</div>
-        <button onclick="navigateTo('page1')">Back to Start 🔄🧸</button>
-        <canvas id="confetti-canvas"></canvas>
-    </section>
+<!-- PAGE 1 -->
+<section class="page active" id="page1">
+  <h1>Welcome to Our World</h1>
 
-    <!-- Audio Elements -->
-    <audio id="chime" src="chime.mp3" preload="auto"></audio> <!-- Placeholder: Add your chime sound file -->
-    <audio id="giggle" src="giggle.mp3" preload="auto"></audio> <!-- Placeholder: Add your giggle sound file -->
+  <p class="message">
+    <!-- INSERT: What she means to you -->
+    [Your loving message here]
+  </p>
 
-    <!-- Link to External JS -->
-    <script src="script.js"></script>
+  <button class="cute-btn" id="hugBtn">🤗 Click for a Hug</button>
+  <button class="nav-btn" onclick="goToPage(2)">💖 Next</button>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="page2">
+  <h1>A Few (of the Many) Reasons...</h1>
+
+  <div class="reasons">
+    <!-- INSERT: Reasons -->
+    <div class="reason">💌 Tap Me<span>Your laugh is my favorite sound.</span></div>
+    <div class="reason">💌 Tap Me<span>The way you make everything brighter.</span></div>
+    <div class="reason">💌 Tap Me<span>Your kindness melts my heart.</span></div>
+    <div class="reason">💌 Tap Me<span>You feel like home.</span></div>
+  </div>
+
+  <button class="nav-btn" onclick="goToPage(3)">📸 Next</button>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="page3">
+  <h1>Our Little Adventures</h1>
+
+  <div class="memory-strip">
+    <!-- INSERT: Memories -->
+    <div class="memory">🧺<span>[First picnic memory]</span></div>
+    <div class="memory">🎬<span>[Movie night memory]</span></div>
+    <div class="memory">☕<span>[Coffee date memory]</span></div>
+    <div class="memory">🌄<span>[Adventure memory]</span></div>
+  </div>
+
+  <button class="nav-btn" onclick="goToPage(4)">✨ Next</button>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page" id="page4">
+  <h1>My Wish for Our New Year</h1>
+
+  <p class="message">
+    <!-- INSERT: Wishes -->
+    [Your heartfelt wish for the year ahead]
+  </p>
+
+  <img src="illustrations/heart-cloud.png" class="wish-dandelion" id="wishBtn" alt="Make a Wish">
+</section>
+
+<!-- PAGE 5 -->
+<section class="page" id="page5">
+  <h1>Happy New Year, My Love! 🎆</h1>
+
+  <p class="final-message">
+    <!-- INSERT: Final message -->
+    [Your final loving message]
+  </p>
+
+  <div class="countdown">00:00:00 — Time for our new beginning 💫</div>
+
+  <button class="nav-btn" onclick="goToPage(1)">🔁 Back to Start</button>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
-
-// Global Variables
-let isMuted = false;
-const pages = ['page1', 'page2', 'page3', 'page4', 'page5'];
-
-// Navigation Function
-function navigateTo(pageId) {
-    pages.forEach(id => document.getElementById(id).classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-    playSound('chime'); // Page transition sound
-}
-
-// Mute Toggle
-function toggleMute() {
-    isMuted = !isMuted;
-    document.querySelector('.mute-toggle').textContent = isMuted ? '🔇 Unmute Sounds 🧸' : '🔊 Mute Sounds 🧸';
-    const audios = document.querySelectorAll('audio');
-    audios.forEach(audio => audio.muted = isMuted);
-}
-
-// Play Sound Helper
-function playSound(id) {
-    if (!isMuted) {
-        document.getElementById(id).play();
-    }
-}
-
-// Page 1: Show Hearts and Teddy Bears
-function showHearts() {
-    const container = document.getElementById('hearts');
-    const teddyContainer = document.getElementById('teddy-float');
-    container.innerHTML = '';
-    teddyContainer.innerHTML = '';
-    for (let i = 0; i < 25; i++) { // More hearts
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.textContent = '❤️';
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDelay = Math.random() * 2 + 's';
-        container.appendChild(heart);
-    }
-    for (let i = 0; i < 10; i++) { // Floating teddy bears
-        const teddy = document.createElement('div');
-        teddy.className = 'teddy-bear';
-        teddy.textContent = '🧸';
-        teddy.style.left = Math.random() * 100 + '%';
-        teddy.style.animationDelay = Math.random() * 3 + 's';
-        teddyContainer.appendChild(teddy);
-    }
-    setTimeout(() => {
-        container.innerHTML = '';
-        teddyContainer.innerHTML = '';
-    }, 6000); // Longer duration for cuteness
-}
-
-// Page 2: Reveal Reason
-function revealReason(item) {
-    const hidden = item.querySelector('.hidden');
-    hidden.style.display = hidden.style.display === 'block' ? 'none' : 'block';
-    hidden.style.animation = 'fadeIn 0.5s';
-    // Add a cute sparkle effect
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    sparkle.textContent = '✨';
-    sparkle.style.left = '50%';
-    sparkle.style.top = '50%';
-    item.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 2000);
-}
-
-// Page 3: Pulse and Tooltip
-function pulse(item) {
-    item.style.transform = 'scale(1.1) rotate(3deg)'; // More playful
-    setTimeout(() => item.style.transform = 'scale(1) rotate(0deg)', 300);
-}
-function showTooltip(item, memory) {
-    const tooltip = document.getElementById('tooltip');
-    tooltip.textContent = `<!-- INSERT: Caption for ${memory}, e.g., "Remember our ${memory.toLowerCase()}? It was amazing! 🥰
