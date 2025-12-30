@@ -1,91 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Little World 💕</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Loving Surprise</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library for Page 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <!-- Mute Toggle -->
+    <button class="mute-toggle" onclick="toggleMute()">🔊 Mute Sounds 🧸</button>
 
-<!-- MUTE TOGGLE -->
-<button id="muteToggle">🔊</button>
+    <!-- Page 1: Home -->
+    <section id="page1" class="page active">
+        <h1>Welcome to Our World 🧸💖</h1>
+        <p><!-- INSERT: Your big, warm welcome message here, e.g., "My dearest [Girlfriend's Name], welcome to a little corner of the internet I made just for you." --></p>
+        <p><!-- INSERT: A short, sweet paragraph about what she means to you, e.g., "You are the light of my life, the reason I smile every day. 🥰" --></p>
+        <button onclick="playSound('chime'); showHearts();">Click for a Hug 💕🧸</button>
+        <button onclick="navigateTo('page2')">Next: Reasons Why ➡️❤️</button>
+        <div class="hearts-container" id="hearts"></div>
+        <div class="teddy-float" id="teddy-float"></div>
+    </section>
 
-<!-- PAGE 1 -->
-<section class="page active" id="page1">
-  <h1>Welcome to Our World</h1>
-  <p class="message">
-    <!-- INSERT: What she means to you -->
-    [Your loving message here]
-  </p>
+    <!-- Page 2: Reasons Why -->
+    <section id="page2" class="page">
+        <h1>A Few (of the Many) Reasons... 🐾💖</h1>
+        <div id="reasons-list">
+            <div class="reason-item" onclick="revealReason(this)">
+                <span>💌🧸 Reason 1</span>
+                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "Your laugh is my favorite sound. 🌸" --></p>
+            </div>
+            <div class="reason-item" onclick="revealReason(this)">
+                <span>💌🧸 Reason 2</span>
+                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "The way you [specific habit, e.g., dance in the kitchen]. 🥰" --></p>
+            </div>
+            <div class="reason-item" onclick="revealReason(this)">
+                <span>💌🧸 Reason 3</span>
+                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "Your incredible kindness. 💖" --></p>
+            </div>
+            <!-- Add more as needed -->
+        </div>
+        <button onclick="navigateTo('page3')">Next: Our Memories ➡️❤️</button>
+    </section>
 
-  <button class="cute-btn" id="hugBtn">🤗 Click for a Hug</button>
-  <button class="nav-btn" onclick="goToPage(2)">Next: Reasons Why 💖</button>
-</section>
+    <!-- Page 3: Memories -->
+    <section id="page3" class="page">
+        <h1>Our Little Adventures 🧸🌸</h1>
+        <div class="memory-gallery">
+            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Picnic')">🧺🧸 Picnic</div>
+            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Movie')">🎥💖 Movie Night</div>
+            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Mountain')">🏔️🥰 Hike</div>
+            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Coffee')">☕🧸 Coffee Date</div>
+        </div>
+        <div class="tooltip" id="tooltip"><!-- INSERT: Caption like "Remember our first picnic? It was magical! 🥰" --></div>
+        <button onclick="navigateTo('page4')">Next: A Wish for Us ➡️❤️</button>
+    </section>
 
-<!-- PAGE 2 -->
-<section class="page" id="page2">
-  <h1>A Few (of the Many) Reasons...</h1>
+    <!-- Page 4: Wish -->
+    <section id="page4" class="page">
+        <h1>My Wish for Our New Year 🧸💖</h1>
+        <p><!-- INSERT: Your heartfelt paragraph here, e.g., "I wish for more adventures, more laughter, and a lifetime of love together. 🌸🥰" --></p>
+        <button onclick="makeWish()">Make a Wish Together 🌟🧸</button>
+        <div id="wish-effect"></div>
+    </section>
 
-  <div class="reasons">
-    <!-- Each reason card -->
-    <div class="reason">💌 <span>[Your loving reason here]</span></div>
-    <div class="reason">💌 <span>[Your loving reason here]</span></div>
-    <div class="reason">💌 <span>[Your loving reason here]</span></div>
-    <div class="reason">💌 <span>[Your loving reason here]</span></div>
-  </div>
+    <!-- Page 5: Finale -->
+    <section id="page5" class="page">
+        <h1>Happy New Year, My Love! 🧸💖🥰</h1>
+        <p><!-- INSERT: Your final, profound message here, e.g., "Here's to new beginnings, endless love, and a year filled with joy. 🌸" --></p>
+        <div id="countdown">00:00:00 - Time for our new beginning! 🧸❤️</div>
+        <button onclick="navigateTo('page1')">Back to Start 🔄🧸</button>
+        <canvas id="confetti-canvas"></canvas>
+    </section>
 
-  <button class="nav-btn" onclick="goToPage(3)">Next: Our Memories 📸</button>
-</section>
+    <!-- Audio Elements -->
+    <audio id="chime" src="chime.mp3" preload="auto"></audio> <!-- Placeholder: Add your chime sound file -->
+    <audio id="giggle" src="giggle.mp3" preload="auto"></audio> <!-- Placeholder: Add your giggle sound file -->
 
-<!-- PAGE 3 -->
-<section class="page" id="page3">
-  <h1>Our Little Adventures</h1>
-
-  <div class="memory-strip">
-    <div class="memory">🧺<span>[Our picnic memory]</span></div>
-    <div class="memory">🎬<span>[Movie night memory]</span></div>
-    <div class="memory">☕<span>[Coffee date memory]</span></div>
-    <div class="memory">🏔️<span>[Adventure memory]</span></div>
-  </div>
-
-  <button class="nav-btn" onclick="goToPage(4)">Next: A Wish for Us ✨</button>
-</section>
-
-<!-- PAGE 4 -->
-<section class="page" id="page4">
-  <h1>My Wish for Our New Year</h1>
-
-  <p class="message">
-    <!-- INSERT: Your hopes & dreams -->
-    [Your heartfelt wish here]
-  </p>
-
-  <button class="cute-btn" id="wishBtn">🌼 Make a Wish Together</button>
-</section>
-
-<!-- PAGE 5 -->
-<section class="page" id="page5">
-  <h1>Happy New Year, My Love! 🎆</h1>
-
-  <p class="final-message">
-    <!-- INSERT: Final powerful message -->
-    [Your final message here]
-  </p>
-
-  <div class="countdown">00:00:00 — Time for our new beginning 💫</div>
-
-  <button class="nav-btn" onclick="goToPage(1)">🔁 Back to Start</button>
-</section>
-
-<script src="script.js"></script>
+    <!-- Link to External JS -->
+    <script src="script.js"></script>
 </body>
 </html>

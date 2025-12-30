@@ -1,75 +1,77 @@
-let muted = false;
+// Global Variables
+let isMuted = false;
+const pages = ['page1', 'page2', 'page3', 'page4', 'page5'];
 
-// PAGE NAVIGATION
-function goToPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(`page${page}`).classList.add('active');
-
-  if (page === 5) launchConfetti();
+// Navigation Function
+function navigateTo(pageId) {
+    pages.forEach(id => document.getElementById(id).classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    playSound('chime'); // Page transition sound
 }
 
-// HUG BUTTON
-document.getElementById('hugBtn').addEventListener('click', () => {
-  for (let i = 0; i < 20; i++) {
-    confetti({
-      particleCount: 5,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  }
-});
-
-// REASONS TOGGLE
-document.querySelectorAll('.reason').forEach(card => {
-  card.addEventListener('click', () => card.classList.toggle('active'));
-});
-
-// MEMORIES
-document.querySelectorAll('.memory').forEach(mem => {
-  mem.addEventListener('click', () => mem.classList.toggle('active'));
-});
-
-// WISH BUTTON
-document.getElementById('wishBtn').addEventListener('click', () => {
-  confetti({
-    particleCount: 100,
-    spread: 120,
-    colors: ['#ffc0cb', '#e6c1ff', '#fff1a8']
-  });
-  setTimeout(() => goToPage(5), 1200);
-});
-
-// CONFETTI ON FINAL PAGE
-function launchConfetti() {
-  const duration = 5 * 1000;
-  const end = Date.now() + duration;
-
-  (function frame() {
-    confetti({
-      particleCount: 3,
-      spread: 100,
-      origin: { x: Math.random(), y: Math.random() - 0.2 }
-    });
-    if (Date.now() < end) requestAnimationFrame(frame);
-  })();
+// Mute Toggle
+function toggleMute() {
+    isMuted = !isMuted;
+    document.querySelector('.mute-toggle').textContent = isMuted ? '🔇 Unmute Sounds 🧸' : '🔊 Mute Sounds 🧸';
+    const audios = document.querySelectorAll('audio');
+    audios.forEach(audio => audio.muted = isMuted);
 }
 
-// FIREWORK CLICKS
-document.addEventListener('click', e => {
-  if (document.getElementById('page5').classList.contains('active')) {
-    confetti({
-      particleCount: 30,
-      spread: 80,
-      origin: {
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight
-      }
-    });
-  }
-});
+// Play Sound Helper
+function playSound(id) {
+    if (!isMuted) {
+        document.getElementById(id).play();
+    }
+}
 
-// MUTE TOGGLE (placeholder)
-document.getElementById('muteToggle').addEventListener('click', () => {
-  muted = !muted;
-  document.getElementById('muteToggle').textContent = muted ? '🔇' : '🔊';
-});
+// Page 1: Show Hearts and Teddy Bears
+function showHearts() {
+    const container = document.getElementById('hearts');
+    const teddyContainer = document.getElementById('teddy-float');
+    container.innerHTML = '';
+    teddyContainer.innerHTML = '';
+    for (let i = 0; i < 25; i++) { // More hearts
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(heart);
+    }
+    for (let i = 0; i < 10; i++) { // Floating teddy bears
+        const teddy = document.createElement('div');
+        teddy.className = 'teddy-bear';
+        teddy.textContent = '🧸';
+        teddy.style.left = Math.random() * 100 + '%';
+        teddy.style.animationDelay = Math.random() * 3 + 's';
+        teddyContainer.appendChild(teddy);
+    }
+    setTimeout(() => {
+        container.innerHTML = '';
+        teddyContainer.innerHTML = '';
+    }, 6000); // Longer duration for cuteness
+}
+
+// Page 2: Reveal Reason
+function revealReason(item) {
+    const hidden = item.querySelector('.hidden');
+    hidden.style.display = hidden.style.display === 'block' ? 'none' : 'block';
+    hidden.style.animation = 'fadeIn 0.5s';
+    // Add a cute sparkle effect
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.textContent = '✨';
+    sparkle.style.left = '50%';
+    sparkle.style.top = '50%';
+    item.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 2000);
+}
+
+// Page 3: Pulse and Tooltip
+function pulse(item) {
+    item.style.transform = 'scale(1.1) rotate(3deg)'; // More playful
+    setTimeout(() => item.style.transform = 'scale(1) rotate(0deg)', 300);
+}
+function showTooltip(item, memory) {
+    const tooltip = document.getElementById('tooltip');
+    tooltip.textContent = `<!-- INSERT: Caption for ${memory}, e.g., "Remember our ${memory.toLowerCase()}? It was amazing! 🥰
