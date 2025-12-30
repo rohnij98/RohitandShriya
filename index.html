@@ -1,334 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Loving Surprise</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti Library for Page 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(to bottom, #ffe6f0, #f0e6ff); /* Pastel gradient */
-            margin: 0;
-            padding: 0;
-            color: #5a4a6a; /* Soft lavender text */
-            overflow-x: hidden;
-            transition: background 0.5s ease;
-        }
-        .page {
-            display: none;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            position: relative;
-        }
-        .page.active {
-            display: block;
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1, h2 {
-            font-family: 'Dancing Script', cursive;
-            color: #d4a5c7; /* Soft pink */
-        }
-        p, li {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        button {
-            background: #ffb3ba; /* Peach */
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            margin: 10px;
-        }
-        button:hover {
-            background: #ff9aa2;
-            transform: scale(1.05);
-        }
-        .mute-toggle {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #a8e6cf; /* Mint */
-            z-index: 1000;
-        }
-        /* Hearts and Sparkles */
-        .heart {
-            color: #ff6b9d;
-            font-size: 2em;
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .sparkle {
-            position: absolute;
-            font-size: 1.5em;
-            color: #ffd700;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-        /* Page-Specific Styles */
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .reason-item {
-            background: #f8e1f4; /* Lavender */
-            border-radius: 10px;
-            padding: 10px;
-            margin: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .reason-item:hover {
-            transform: scale(1.05);
-        }
-        .memory-gallery {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px;
-        }
-        .memory-item {
-            min-width: 150px;
-            height: 150px;
-            background: #ffeaa7; /* Cream */
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .memory-item:hover {
-            transform: scale(1.1);
-        }
-        .tooltip {
-            display: none;
-            position: absolute;
-            background: #fff;
-            border: 1px solid #d4a5c7;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 10;
-        }
-        .firework {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ff6b9d, #ffd700);
-            border-radius: 50%;
-            animation: explode 0.5s ease-out;
-        }
-        @keyframes explode {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(5); opacity: 0; }
-        }
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            .memory-gallery {
-                flex-direction: column;
-                align-items: center;
-            }
-            .memory-item {
-                width: 100px;
-                height: 100px;
-            }
-            button {
-                padding: 8px 16px;
-                font-size: 0.9em;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Little World 💕</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <!-- Mute Toggle -->
-    <button class="mute-toggle" onclick="toggleMute()">🔊 Mute Sounds</button>
 
-    <!-- Page 1: Home -->
-    <section id="page1" class="page active">
-        <h1>Welcome to Our World</h1>
-        <p><!-- INSERT: Your big, warm welcome message here, e.g., "My dearest [Girlfriend's Name], welcome to a little corner of the internet I made just for you." --></p>
-        <p><!-- INSERT: A short, sweet paragraph about what she means to you, e.g., "You are the light of my life, the reason I smile every day." --></p>
-        <button onclick="playSound('chime'); showHearts();">Click for a Hug 💕</button>
-        <button onclick="navigateTo('page2')">Next: Reasons Why ➡️</button>
-        <div class="hearts-container" id="hearts"></div>
-    </section>
+<!-- MUTE TOGGLE -->
+<button id="muteToggle">🔊</button>
 
-    <!-- Page 2: Reasons Why -->
-    <section id="page2" class="page">
-        <h1>A Few (of the Many) Reasons...</h1>
-        <div id="reasons-list">
-            <div class="reason-item" onclick="revealReason(this)">
-                <span>💌 Reason 1</span>
-                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "Your laugh is my favorite sound." --></p>
-            </div>
-            <div class="reason-item" onclick="revealReason(this)">
-                <span>💌 Reason 2</span>
-                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "The way you [specific habit, e.g., dance in the kitchen]." --></p>
-            </div>
-            <div class="reason-item" onclick="revealReason(this)">
-                <span>💌 Reason 3</span>
-                <p class="hidden"><!-- INSERT: Your loving reason here, e.g., "Your incredible kindness." --></p>
-            </div>
-            <!-- Add more as needed -->
-        </div>
-        <button onclick="navigateTo('page3')">Next: Our Memories ➡️</button>
-    </section>
+<!-- PAGE 1 -->
+<section class="page active" id="page1">
+  <h1>Welcome to Our World</h1>
+  <p class="message">
+    <!-- INSERT: What she means to you -->
+    [Your loving message here]
+  </p>
 
-    <!-- Page 3: Memories -->
-    <section id="page3" class="page">
-        <h1>Our Little Adventures</h1>
-        <div class="memory-gallery">
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Picnic')">🧺 Picnic</div>
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Movie')">🎥 Movie Night</div>
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Mountain')">🏔️ Hike</div>
-            <div class="memory-item" onmouseover="pulse(this)" onclick="showTooltip(this, 'Coffee')">☕ Coffee Date</div>
-        </div>
-        <div class="tooltip" id="tooltip"><!-- INSERT: Caption like "Remember our first picnic? It was magical!" --></div>
-        <button onclick="navigateTo('page4')">Next: A Wish for Us ➡️</button>
-    </section>
+  <button class="cute-btn" id="hugBtn">🤗 Click for a Hug</button>
+  <button class="nav-btn" onclick="goToPage(2)">Next: Reasons Why 💖</button>
+</section>
 
-    <!-- Page 4: Wish -->
-    <section id="page4" class="page">
-        <h1>My Wish for Our New Year</h1>
-        <p><!-- INSERT: Your heartfelt paragraph here, e.g., "I wish for more adventures, more laughter, and a lifetime of love together." --></p>
-        <button onclick="makeWish()">Make a Wish Together 🌟</button>
-        <div id="wish-effect"></div>
-    </section>
+<!-- PAGE 2 -->
+<section class="page" id="page2">
+  <h1>A Few (of the Many) Reasons...</h1>
 
-    <!-- Page 5: Finale -->
-    <section id="page5" class="page">
-        <h1>Happy New Year, My Love!</h1>
-        <p><!-- INSERT: Your final, profound message here, e.g., "Here's to new beginnings, endless love, and a year filled with joy." --></p>
-        <div id="countdown">00:00:00 - Time for our new beginning!</div>
-        <button onclick="navigateTo('page1')">Back to Start 🔄</button>
-        <canvas id="confetti-canvas"></canvas>
-    </section>
+  <div class="reasons">
+    <!-- Each reason card -->
+    <div class="reason">💌 <span>[Your loving reason here]</span></div>
+    <div class="reason">💌 <span>[Your loving reason here]</span></div>
+    <div class="reason">💌 <span>[Your loving reason here]</span></div>
+    <div class="reason">💌 <span>[Your loving reason here]</span></div>
+  </div>
 
-    <!-- Audio Elements -->
-    <audio id="chime" src="chime.mp3" preload="auto"></audio> <!-- Placeholder: Add your chime sound file -->
-    <audio id="giggle" src="giggle.mp3" preload="auto"></audio> <!-- Placeholder: Add your giggle sound file -->
+  <button class="nav-btn" onclick="goToPage(3)">Next: Our Memories 📸</button>
+</section>
 
-    <script>
-        // Global Variables
-        let isMuted = false;
-        const pages = ['page1', 'page2', 'page3', 'page4', 'page5'];
+<!-- PAGE 3 -->
+<section class="page" id="page3">
+  <h1>Our Little Adventures</h1>
 
-        // Navigation Function
-        function navigateTo(pageId) {
-            pages.forEach(id => document.getElementById(id).classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            playSound('chime'); // Page transition sound
-        }
+  <div class="memory-strip">
+    <div class="memory">🧺<span>[Our picnic memory]</span></div>
+    <div class="memory">🎬<span>[Movie night memory]</span></div>
+    <div class="memory">☕<span>[Coffee date memory]</span></div>
+    <div class="memory">🏔️<span>[Adventure memory]</span></div>
+  </div>
 
-        // Mute Toggle
-        function toggleMute() {
-            isMuted = !isMuted;
-            document.querySelector('.mute-toggle').textContent = isMuted ? '🔇 Unmute Sounds' : '🔊 Mute Sounds';
-            const audios = document.querySelectorAll('audio');
-            audios.forEach(audio => audio.muted = isMuted);
-        }
+  <button class="nav-btn" onclick="goToPage(4)">Next: A Wish for Us ✨</button>
+</section>
 
-        // Play Sound Helper
-        function playSound(id) {
-            if (!isMuted) {
-                document.getElementById(id).play();
-            }
-        }
+<!-- PAGE 4 -->
+<section class="page" id="page4">
+  <h1>My Wish for Our New Year</h1>
 
-        // Page 1: Show Hearts
-        function showHearts() {
-            const container = document.getElementById('hearts');
-            container.innerHTML = '';
-            for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.textContent = '❤️';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 2 + 's';
-                container.appendChild(heart);
-            }
-            setTimeout(() => container.innerHTML = '', 5000); // Clear after 5s
-        }
+  <p class="message">
+    <!-- INSERT: Your hopes & dreams -->
+    [Your heartfelt wish here]
+  </p>
 
-        // Page 2: Reveal Reason
-        function revealReason(item) {
-            const hidden = item.querySelector('.hidden');
-            hidden.style.display = hidden.style.display === 'block' ? 'none' : 'block';
-            hidden.style.animation = 'fadeIn 0.5s';
-        }
+  <button class="cute-btn" id="wishBtn">🌼 Make a Wish Together</button>
+</section>
 
-        // Page 3: Pulse and Tooltip
-        function pulse(item) {
-            item.style.transform = 'scale(1.1)';
-            setTimeout(() => item.style.transform = 'scale(1)', 300);
-        }
-        function showTooltip(item, memory) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.textContent = `<!-- INSERT: Caption for ${memory}, e.g., "Remember our ${memory.toLowerCase()}? It was amazing!" -->`;
-            tooltip.style.display = 'block';
-            tooltip.style.left = item.offsetLeft + 'px';
-            tooltip.style.top = item.offsetTop - 50 + 'px';
-            setTimeout(() => tooltip.style.display = 'none', 3000);
-        }
+<!-- PAGE 5 -->
+<section class="page" id="page5">
+  <h1>Happy New Year, My Love! 🎆</h1>
 
-        // Page 4: Make Wish
-        function makeWish() {
-            const effect = document.getElementById('wish-effect');
-            effect.innerHTML = '';
-            for (let i = 0; i < 50; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.textContent = '✨';
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.top = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 2 + 's';
-                effect.appendChild(sparkle);
-            }
-            setTimeout(() => navigateTo('page5'), 3000); // Auto-navigate after effect
-        }
+  <p class="final-message">
+    <!-- INSERT: Final powerful message -->
+    [Your final message here]
+  </p>
 
-        // Page 5: Confetti and Fireworks
-        document.addEventListener('DOMContentLoaded', () => {
-            if (document.getElementById('page5').classList.contains('active')) {
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Initial burst
-                setInterval(() => confetti({ particleCount: 20, spread: 50 }), 2000); // Continuous
-            }
-        });
-        document.addEventListener('click', (e) => {
-            if (document.getElementById('page5').classList.contains('active')) {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = e.clientX + 'px';
-                firework.style.top = e.clientY + 'px';
-                document.body.appendChild(firework);
-                setTimeout(() => firework.remove(), 500);
-            }
-        });
-    </script>
+  <div class="countdown">00:00:00 — Time for our new beginning 💫</div>
+
+  <button class="nav-btn" onclick="goToPage(1)">🔁 Back to Start</button>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
