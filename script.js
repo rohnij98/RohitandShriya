@@ -1,86 +1,87 @@
 /* ======================================================
-   WAIT FOR DOM TO LOAD (CRITICAL FIX)
+   🚀 INITIALISE AFTER DOM LOAD
 ====================================================== */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===============================
-     GLOBAL PAGE STATE
-  ================================ */
+  /* ======================================================
+     📄 PAGE NAVIGATION
+  ====================================================== */
   const pages = document.querySelectorAll(".page");
   let currentPage = 0;
 
   function showPage(index) {
     pages.forEach((page, i) => {
-      page.classList.toggle("active", i === index);
+      page.style.display = i === index ? "flex" : "none";
     });
     currentPage = index;
   }
 
-  window.nextPage = function () {
+  function nextPage() {
     if (currentPage < pages.length - 1) {
       showPage(currentPage + 1);
     }
-  };
+  }
 
-  window.goHome = function () {
+  function goHome() {
     showPage(0);
-  };
+  }
+
+  // Make navigation globally accessible
+  window.nextPage = nextPage;
+  window.goHome = goHome;
 
   showPage(0);
 
-  /* ===============================
-     BACKGROUND MUSIC (SAFE)
-  ================================ */
+  /* ======================================================
+     🎵 BACKGROUND MUSIC (BROWSER SAFE)
+  ====================================================== */
   const bgMusic = document.getElementById("bgMusic");
   const muteToggle = document.getElementById("muteToggle");
 
   let musicStarted = false;
-  let muted = false;
 
   function startMusic() {
-    if (!musicStarted && !muted && bgMusic) {
+    if (!musicStarted && bgMusic) {
       bgMusic.volume = 0.4;
       bgMusic.play().catch(() => {});
       musicStarted = true;
     }
   }
 
-  document.addEventListener("click", startMusic);
-  document.addEventListener("touchstart", startMusic);
-  document.addEventListener("keydown", startMusic);
+  document.addEventListener("click", startMusic, { once: true });
+  document.addEventListener("touchstart", startMusic, { once: true });
 
   if (muteToggle && bgMusic) {
     muteToggle.addEventListener("click", (e) => {
       e.stopPropagation();
-      muted = !muted;
-      bgMusic.muted = muted;
-      muteToggle.textContent = muted ? "🔇" : "🔊";
+      bgMusic.muted = !bgMusic.muted;
+      muteToggle.textContent = bgMusic.muted ? "🔇" : "🔊";
     });
   }
 
-  /* ===============================
-     PAGE 1 — HUG
-  ================================ */
+  /* ======================================================
+     🤗 PAGE 1 — HUG BUTTON
+  ====================================================== */
   const hugBtn = document.getElementById("hugBtn");
   if (hugBtn) {
     hugBtn.addEventListener("click", () => {
-      spawnHearts(25);
+      spawnHearts(30);
       bounceMascot();
     });
   }
 
-  /* ===============================
-     PAGE 2 — REASONS
-  ================================ */
+  /* ======================================================
+     💌 PAGE 2 — REASONS
+  ====================================================== */
   document.querySelectorAll(".reason").forEach(reason => {
     reason.addEventListener("click", () => {
       reason.classList.toggle("revealed");
     });
   });
 
-  /* ===============================
-     PAGE 3 — MEMORIES
-  ================================ */
+  /* ======================================================
+     🧸 PAGE 3 — MEMORIES
+  ====================================================== */
   document.querySelectorAll(".memory").forEach(memory => {
     memory.addEventListener("click", () => {
       const caption = memory.querySelector(".caption");
@@ -88,30 +89,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===============================
-     PAGE 4 — WISH
-  ================================ */
+  /* ======================================================
+     🌼 PAGE 4 — WISH
+  ====================================================== */
   const wishBtn = document.getElementById("wishBtn");
   if (wishBtn) {
     wishBtn.addEventListener("click", () => {
       scatterSparkles();
-      setTimeout(() => nextPage(), 1200);
+      setTimeout(nextPage, 1200);
     });
   }
 
-  /* ===============================
-     PAGE 5 — FIREWORKS
-  ================================ */
-  const page5 = document.getElementById("page5");
-  if (page5) {
-    page5.addEventListener("click", (e) => {
+  /* ======================================================
+     🎆 PAGE 5 — FIREWORKS
+  ====================================================== */
+  const finale = document.getElementById("page5");
+  if (finale) {
+    finale.addEventListener("click", (e) => {
       createFirework(e.clientX, e.clientY);
     });
   }
 
-  /* ===============================
-     MASCOT
-  ================================ */
+  /* ======================================================
+     🐰 MASCOT
+  ====================================================== */
   const mascot = document.getElementById("mascot");
 
   function bounceMascot() {
@@ -120,24 +121,25 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => mascot.classList.remove("bounce"), 600);
   }
 
-  /* ===============================
-     HEARTS
-  ================================ */
-  function spawnHearts(count = 15) {
+  /* ======================================================
+     💕 HEARTS
+  ====================================================== */
+  function spawnHearts(count) {
     for (let i = 0; i < count; i++) {
       const heart = document.createElement("div");
       heart.className = "floating-heart";
       heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-20px";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 4000);
     }
   }
 
-  /* ===============================
-     SPARKLES
-  ================================ */
+  /* ======================================================
+     ✨ SPARKLES
+  ====================================================== */
   function scatterSparkles() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 25; i++) {
       const spark = document.createElement("div");
       spark.className = "sparkle";
       spark.style.left = Math.random() * 100 + "vw";
@@ -147,9 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* ===============================
-     FIREWORK
-  ================================ */
+  /* ======================================================
+     🎇 FIREWORK
+  ====================================================== */
   function createFirework(x, y) {
     const firework = document.createElement("div");
     firework.className = "firework";
@@ -159,17 +161,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => firework.remove(), 1000);
   }
 
-  /* ===============================
-     LIVE COUNTDOWN
-  ================================ */
+  /* ======================================================
+     ⏳ LIVE COUNTDOWN
+  ====================================================== */
   const countdownEl = document.getElementById("countdownTimer");
 
   if (countdownEl) {
     const targetDate = new Date("January 1, 2026 00:00:00").getTime();
 
     function updateCountdown() {
-      const now = Date.now();
-      const diff = targetDate - now;
+      const diff = targetDate - Date.now();
 
       if (diff <= 0) {
         countdownEl.textContent =
