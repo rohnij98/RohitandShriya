@@ -6,7 +6,7 @@ const pages = document.querySelectorAll(".page");
 let currentPage = 0;
 
 /* ======================================================
-   🎵 BACKGROUND MUSIC (FIXED & BROWSER-SAFE)
+   🎵 BACKGROUND MUSIC (FIXED)
 ====================================================== */
 
 const bgMusic = document.getElementById("bgMusic");
@@ -15,7 +15,6 @@ const muteToggle = document.getElementById("muteToggle");
 let musicStarted = false;
 let muted = false;
 
-// Start music ONLY after real user interaction
 function startMusic() {
   if (!musicStarted && !muted) {
     bgMusic.volume = 0.4;
@@ -24,12 +23,10 @@ function startMusic() {
   }
 }
 
-// Listen for ALL safe interaction types
 document.addEventListener("click", startMusic);
 document.addEventListener("touchstart", startMusic);
 document.addEventListener("keydown", startMusic);
 
-// Mute / Unmute
 muteToggle.addEventListener("click", (e) => {
   e.stopPropagation();
   muted = !muted;
@@ -59,18 +56,16 @@ function goHome() {
 }
 
 /* ======================================================
-   🤗 PAGE 1 — CLICK FOR A HUG
+   🤗 PAGE 1 — HUG
 ====================================================== */
 
-const hugBtn = document.getElementById("hugBtn");
-
-hugBtn.addEventListener("click", () => {
-  spawnHearts(25);
+document.getElementById("hugBtn").addEventListener("click", () => {
+  spawnHearts(30);
   bounceMascot();
 });
 
 /* ======================================================
-   💌 PAGE 2 — LOVE REASONS REVEAL
+   💌 PAGE 2 — REASONS
 ====================================================== */
 
 document.querySelectorAll(".reason").forEach(reason => {
@@ -80,39 +75,34 @@ document.querySelectorAll(".reason").forEach(reason => {
 });
 
 /* ======================================================
-   🧸 PAGE 3 — MEMORY TOOLTIP
+   🧸 PAGE 3 — MEMORIES
 ====================================================== */
 
 document.querySelectorAll(".memory").forEach(memory => {
   memory.addEventListener("click", () => {
-    const caption = memory.querySelector(".caption");
-    caption.classList.toggle("show");
+    memory.querySelector(".caption").classList.toggle("show");
   });
 });
 
 /* ======================================================
-   🌼 PAGE 4 — MAKE A WISH
+   🌼 PAGE 4 — WISH
 ====================================================== */
 
-const wishBtn = document.getElementById("wishBtn");
-
-wishBtn.addEventListener("click", () => {
+document.getElementById("wishBtn").addEventListener("click", () => {
   scatterSparkles();
   setTimeout(() => nextPage(), 1500);
 });
 
 /* ======================================================
-   🎆 PAGE 5 — CONFETTI & FIREWORKS
+   🎆 PAGE 5 — FIREWORKS
 ====================================================== */
 
-const finalePage = document.getElementById("page5");
-
-finalePage.addEventListener("click", (e) => {
+document.getElementById("page5").addEventListener("click", (e) => {
   createFirework(e.clientX, e.clientY);
 });
 
 /* ======================================================
-   🐰 MASCOT INTERACTION
+   🐰 MASCOT
 ====================================================== */
 
 const mascot = document.getElementById("mascot");
@@ -123,23 +113,21 @@ function bounceMascot() {
 }
 
 /* ======================================================
-   💕 HEART SPAWNER
+   💕 HEARTS
 ====================================================== */
 
-function spawnHearts(count = 10) {
+function spawnHearts(count = 15) {
   for (let i = 0; i < count; i++) {
     const heart = document.createElement("div");
     heart.className = "floating-heart";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 2 + Math.random() * 2 + "s";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 4000);
   }
 }
 
 /* ======================================================
-   ✨ SPARKLES (WISH EFFECT)
+   ✨ SPARKLES
 ====================================================== */
 
 function scatterSparkles() {
@@ -149,13 +137,12 @@ function scatterSparkles() {
     spark.style.left = Math.random() * 100 + "vw";
     spark.style.top = Math.random() * 100 + "vh";
     document.body.appendChild(spark);
-
     setTimeout(() => spark.remove(), 2000);
   }
 }
 
 /* ======================================================
-   🎇 FIREWORKS (FINAL PAGE)
+   🎇 FIREWORK
 ====================================================== */
 
 function createFirework(x, y) {
@@ -164,9 +151,39 @@ function createFirework(x, y) {
   firework.style.left = x + "px";
   firework.style.top = y + "px";
   document.body.appendChild(firework);
-
   setTimeout(() => firework.remove(), 1000);
 }
+
+/* ======================================================
+   ⏳ LIVE COUNTDOWN (NEW!)
+====================================================== */
+
+const countdownEl = document.getElementById("countdownTimer");
+
+/* 🔧 SET YOUR TARGET DATE HERE */
+const targetDate = new Date("January 1, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    countdownEl.textContent = "🎉 HAPPY NEW YEAR! 🎉 Time for our new beginning 💖";
+    return;
+  }
+
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  countdownEl.textContent =
+    `${String(hours).padStart(2, "0")}:` +
+    `${String(minutes).padStart(2, "0")}:` +
+    `${String(seconds).padStart(2, "0")} — Until our new year ✨`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
 /* ======================================================
    🚀 INIT
