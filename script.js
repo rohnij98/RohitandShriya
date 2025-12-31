@@ -3,61 +3,57 @@ const bgMusic = document.getElementById("bgMusic");
 let musicStarted = false;
 
 /* PAGE NAV */
-function goToPage(num) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(`page${num}`).classList.add('active');
-  if (num === 5) launchConfetti();
+function goToPage(n) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(`page${n}`).classList.add("active");
+  if (n === 5) bigConfetti();
 }
 
-/* MUSIC */
-document.addEventListener('click', () => {
+/* 🎵 MUSIC */
+document.addEventListener("click", () => {
   if (!musicStarted && !muted) {
     bgMusic.volume = 0;
     bgMusic.play();
-    fadeInMusic();
+    let v = 0;
+    const fade = setInterval(() => {
+      if (v < 0.4) {
+        v += 0.02;
+        bgMusic.volume = v;
+      } else clearInterval(fade);
+    }, 100);
     musicStarted = true;
   }
 }, { once: true });
 
-function fadeInMusic() {
-  let v = 0;
-  const i = setInterval(() => {
-    if (v < 0.4) {
-      v += 0.02;
-      bgMusic.volume = v;
-    } else clearInterval(i);
-  }, 100);
-}
-
-document.getElementById("muteToggle").onclick = () => {
+muteToggle.onclick = () => {
   muted = !muted;
   bgMusic.muted = muted;
   muteToggle.textContent = muted ? "🔇" : "🔊";
 };
 
-/* HUG */
-document.getElementById("hugBtn").onclick = () => {
+/* 🤗 Hug */
+hugBtn.onclick = () => {
   confetti({ particleCount: 80, spread: 100, colors: ['#ffc0cb','#e6c1ff'] });
 };
 
-/* REASONS */
+/* 💌 Reasons */
 document.querySelectorAll(".reason").forEach(r =>
   r.onclick = () => r.classList.toggle("active")
 );
 
-/* MEMORIES */
+/* 📸 Memories */
 document.querySelectorAll(".memory").forEach(m =>
   m.onclick = () => m.classList.toggle("active")
 );
 
-/* WISH */
-document.getElementById("wishBtn").onclick = () => {
+/* 🌼 Wish */
+wishBtn.onclick = () => {
   confetti({ particleCount: 120, spread: 120 });
   setTimeout(() => goToPage(5), 1200);
 };
 
-/* FINAL FIREWORKS */
-function launchConfetti() {
+/* 🎆 Finale */
+function bigConfetti() {
   confetti({ particleCount: 200, spread: 180 });
 }
 

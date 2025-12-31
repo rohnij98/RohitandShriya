@@ -10,17 +10,20 @@ body {
   overflow-x: hidden;
 }
 
-/* FLOATING BACKGROUND */
+/* 🌸 Floating background */
 .floating-bg {
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='10' y='40' font-size='24'%3E💗✨%3C/text%3E%3C/svg%3E");
-  opacity: 0.25;
-  animation: drift 60s linear infinite;
+  background-image:
+    radial-gradient(circle at 20% 20%, #ffd6e8 2px, transparent 2px),
+    radial-gradient(circle at 80% 30%, #e6c1ff 2px, transparent 2px);
+  background-size: 120px 120px;
+  opacity: 0.3;
+  animation: float 60s linear infinite;
   pointer-events: none;
 }
 
-@keyframes drift {
+@keyframes float {
   from { background-position: 0 0; }
   to { background-position: 0 -2000px; }
 }
@@ -33,9 +36,7 @@ body {
   animation: fadeIn 0.6s ease;
 }
 
-.page.active {
-  display: block;
-}
+.page.active { display: block; }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(15px); }
@@ -60,18 +61,19 @@ h1 {
   border-radius: 30px;
   margin: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 }
 
 .cute-btn:hover, .nav-btn:hover {
   transform: scale(1.08);
 }
 
+/* 💌 Reasons */
 .reasons {
-  max-width: 500px;
-  margin: auto;
   display: grid;
   gap: 1rem;
+  max-width: 500px;
+  margin: auto;
 }
 
 .reason {
@@ -81,14 +83,10 @@ h1 {
   cursor: pointer;
 }
 
-.reason span {
-  display: none;
-}
+.reason span { display: none; }
+.reason.active span { display: block; }
 
-.reason.active span {
-  display: block;
-}
-
+/* 📸 Memories */
 .memory-strip {
   display: flex;
   gap: 1rem;
@@ -104,49 +102,42 @@ h1 {
   transition: transform 0.3s;
 }
 
-.memory:hover {
-  transform: scale(1.1);
-}
+.memory:hover { transform: scale(1.1); }
+.memory span { display: none; }
+.memory.active span { display: block; }
 
-.memory span {
-  display: none;
-}
-
-.memory.active span {
-  display: block;
-}
-
-.wish-dandelion {
-  width: 140px;
-  cursor: pointer;
-  animation: floaty 3s ease-in-out infinite;
-}
-
-@keyframes floaty {
-  50% { transform: translateY(-10px); }
-}
-
-/* MASCOT */
+/* 🐰 Mascot */
 #mascot {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  width: 80px;
-  animation: bounce 2s infinite;
   cursor: pointer;
+  animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
   50% { transform: translateY(-10px); }
 }
 
-/* MUTE */
+/* 🌼 Dandelion */
+.dandelion {
+  width: 140px;
+  margin: auto;
+  cursor: pointer;
+  animation: floaty 3s infinite;
+}
+
+@keyframes floaty {
+  50% { transform: translateY(-8px); }
+}
+
+/* 🔊 Mute */
 #muteToggle {
   position: fixed;
   top: 10px;
   right: 10px;
-  border: none;
   background: #fff;
+  border: none;
   border-radius: 50%;
   padding: 0.5rem;
   cursor: pointer;
