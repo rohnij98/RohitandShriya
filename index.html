@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Little World 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 🌸 Floating pastel background -->
+<div class="floating-bg"></div>
+
+<!-- 🎵 Background music -->
+<audio id="bgMusic" loop>
+  <!-- Replace with your own romantic track -->
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🔊 Mute -->
+<button id="muteToggle">🔊</button>
+
+<!-- 🐰 Bunny Mascot (SVG Illustration) -->
+<div id="mascot">
+<svg width="90" height="90" viewBox="0 0 200 200">
+  <ellipse cx="70" cy="40" rx="20" ry="40" fill="#ffd6e8"/>
+  <ellipse cx="130" cy="40" rx="20" ry="40" fill="#ffd6e8"/>
+  <circle cx="100" cy="100" r="55" fill="#fff"/>
+  <circle cx="85" cy="95" r="5" fill="#6b4c7a"/>
+  <circle cx="115" cy="95" r="5" fill="#6b4c7a"/>
+  <circle cx="100" cy="110" r="4" fill="#ff9dbb"/>
+</svg>
+</div>
+
+<!-- 🌍 PAGE 1 -->
+<section class="page active" id="page1">
+  <h1>Welcome to Our World</h1>
+
+  <p class="message">
+    <!-- INSERT: What she means to you -->
+    [Your loving message here]
+  </p>
+
+  <button class="cute-btn" id="hugBtn">🤗 Click for a Hug</button>
+  <button class="nav-btn" onclick="goToPage(2)">💖 Next</button>
+</section>
+
+<!-- 💌 PAGE 2 -->
+<section class="page" id="page2">
+  <h1>A Few (of the Many) Reasons...</h1>
+
+  <div class="reasons">
+    <!-- Each envelope opens -->
+    <div class="reason">💗 Tap<span>Your laugh is my favorite sound.</span></div>
+    <div class="reason">💗 Tap<span>The way you make everything warmer.</span></div>
+    <div class="reason">💗 Tap<span>Your kindness melts me.</span></div>
+    <div class="reason">💗 Tap<span>You feel like home.</span></div>
+  </div>
+
+  <button class="nav-btn" onclick="goToPage(3)">📸 Next</button>
+</section>
+
+<!-- 🐱 PAGE 3 -->
+<section class="page" id="page3">
+  <h1>Our Little Adventures</h1>
+
+  <div class="memory-strip">
+    <div class="memory">🧺<span>[INSERT picnic memory]</span></div>
+    <div class="memory">🎬<span>[INSERT movie memory]</span></div>
+    <div class="memory">☕<span>[INSERT coffee memory]</span></div>
+    <div class="memory">🌄<span>[INSERT adventure memory]</span></div>
+  </div>
+
+  <button class="nav-btn" onclick="goToPage(4)">✨ Next</button>
+</section>
+
+<!-- 🌼 PAGE 4 -->
+<section class="page" id="page4">
+  <h1>My Wish for Our New Year</h1>
+
+  <p class="message">
+    <!-- INSERT: Your wishes -->
+    [Your heartfelt wish for us]
+  </p>
+
+  <!-- 🌼 Dandelion SVG -->
+  <div id="wishBtn" class="dandelion">
+    <svg width="140" height="140" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="20" fill="#fff1a8"/>
+      <line x1="100" y1="120" x2="100" y2="180" stroke="#9ad0a4" stroke-width="4"/>
+      <g stroke="#fff" stroke-width="2">
+        <line x1="100" y1="100" x2="60" y2="60"/>
+        <line x1="100" y1="100" x2="140" y2="60"/>
+        <line x1="100" y1="100" x2="50" y2="100"/>
+        <line x1="100" y1="100" x2="150" y2="100"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- 🎆 PAGE 5 -->
+<section class="page" id="page5">
+  <h1>Happy New Year, My Love! 🎆</h1>
+
+  <p class="final-message">
+    <!-- INSERT: Final message -->
+    [Your final loving message]
+  </p>
+
+  <div class="countdown">00:00:00 — Time for our new beginning 💫</div>
+
+  <button class="nav-btn" onclick="goToPage(1)">🔁 Back to Start</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
